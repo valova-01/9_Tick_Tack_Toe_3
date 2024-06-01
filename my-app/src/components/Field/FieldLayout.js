@@ -1,8 +1,10 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import { selectField } from '../../selectors/selectors.js';
+import { useSelector } from 'react-redux';
 import styles from '../../App.module.css';
 
-const FieldLayout = ({ field, onCellClick }) => {
+const FieldLayout = ({ onCellClick }) => {
+	const field = useSelector(selectField);
 	return (
 		<div className="field-layout">
 			<div className={styles['field-wrapper']}>
@@ -16,11 +18,6 @@ const FieldLayout = ({ field, onCellClick }) => {
 			</div>
 		</div>
 	);
-};
-
-FieldLayout.propTypes = {
-	field: PropTypes.arrayOf(PropTypes.string).isRequired,
-	onCellClick: PropTypes.func.isRequired,
 };
 
 export default FieldLayout;

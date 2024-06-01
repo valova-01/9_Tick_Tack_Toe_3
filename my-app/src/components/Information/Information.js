@@ -1,25 +1,21 @@
-import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import InformationLayout from './InformationLayout';
+import { useSelector } from 'react-redux';
+import { selectCurrentPlayer, selectIsGameEnded, selectIsDraw } from '../../selectors/selectors.js';
 
-export const Information = ({ currentPlayer, isGameEnded, isDraw }) => {
-	const [status, setStatus] = useState('');
+export const Information = () => {
+	const currentPlayer = useSelector(selectCurrentPlayer);
+	const isGameEnded = useSelector(selectIsGameEnded);
+	const isDraw = useSelector(selectIsDraw);
 
-	useEffect(() => {
-		if (isDraw) {
-			setStatus('Ничья');
-		} else if (isGameEnded) {
-			setStatus(`Победа: ${currentPlayer}`);
-		} else {
-			setStatus(`Ходит: ${currentPlayer}`);
-		}
-	}, [isDraw, isGameEnded, currentPlayer]);
+	let status;
+
+	if (isDraw) {
+		status = 'Ничья';
+	} else if (isGameEnded) {
+		status = `Победа: ${currentPlayer}`;
+	} else {
+		status = `Ходит: ${currentPlayer}`;
+	}
 
 	return <InformationLayout status={status} />;
-};
-
-Information.propTypes = {
-	currentPlayer: PropTypes.string,
-	isGameEnded: PropTypes.bool,
-	isDraw: PropTypes.bool,
 };

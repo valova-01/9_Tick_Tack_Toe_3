@@ -5,11 +5,11 @@ import { Field } from '../Field/Field';
 
 import styles from '../../App.module.css';
 
-const GameLayout = ({ currentPlayer, field, handleCellClick, handleRestart, isGameEnded, isDraw }) => {
+const GameLayout = ({ handleRestart }) => {
 	return (
 		<div className="game-layout">
-			<Information currentPlayer={currentPlayer} isGameEnded={isGameEnded} isDraw={isDraw} />
-			<Field field={field} onCellClick={handleCellClick} />
+			<Information />
+			<Field />
 			<div className={styles.restartButton}>
 				<button onClick={handleRestart}>Начать заново</button>
 			</div>
@@ -18,7 +18,6 @@ const GameLayout = ({ currentPlayer, field, handleCellClick, handleRestart, isGa
 };
 
 GameLayout.propTypes = {
-	handleCellClick: PropTypes.func,
 	handleRestart: PropTypes.func,
 };
 
